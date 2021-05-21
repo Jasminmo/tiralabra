@@ -11,12 +11,4 @@ Projekti luotu ja alustettu versionhallinta (Github).
 Ohjelma ei tee muuta kuin tulostaa tekstiä.
 
 ## Mitä opin tällä viikolla
-Tutustuin miten algoritmisesti luoda sokkeloa (katso [WikiPedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)).
-Opiskelin mitä on A*-algoritmi algoritmisesti luoda sokkeloa (katso [WikiPedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)).
-
-## Mikä jäi epäselväksi tai tuottanut vaikeuksia?
-En tiedä miten käyttää A*-algoritmia sokkelon ratkaisemiseen.
-
-## Mitä teen seuraavaksi?
-Yritän luoda GUI-ikkunan, joka piirtää sokkelon ikkunaan.
-
+Opiskelin miten tehdä hakua tekoälyn toteutuksessa kuten [minmax](https://en.wikipedia.org/wiki/Minimax#Minimax_algorithm_with_alternate_moves)- ja [Alpha–beta pruning](https://en.wikipedia.org/wiki/Alpha–beta_prunings)-algoritmeja.
