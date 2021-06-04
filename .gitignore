@@ -3,3 +3,4 @@ target
 *.swp
 app/target
 app/Shakki.iml
+**/.DS_Store

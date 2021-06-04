@@ -4,6 +4,7 @@
 
 package chess.bot;
 
+import chess.ai.Heuristics;
 import chess.engine.GameState;
 import com.github.bhlangonijr.chesslib.move.Move;
 import java.util.logging.Level;
@@ -35,7 +36,7 @@ public class TestBot implements ChessBot {
         try {
             //Generate a chesslib move based on the position
             myMove = this.getMove();
-            
+
             if (myMove != null) {
                 //Transform the move into a UCI string representation
                 return myMove.toString();

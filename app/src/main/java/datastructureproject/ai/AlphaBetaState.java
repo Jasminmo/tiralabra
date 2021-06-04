@@ -1,12 +1,15 @@
 package datastructureproject.ai;
 
-public interface AlphaBetaNode
-    List<AlphaBetaNode> nextStates();
+import java.util.List;
 
-        boolean isMaxState();
+public interface AlphaBetaState {
 
-        boolean isFinalState();
+    List<AlphaBetaState> nextStates();
 
-        int arvo();
+    boolean isMaxState();
+
+    boolean isFinalState();
+
+    int value();
 
 }

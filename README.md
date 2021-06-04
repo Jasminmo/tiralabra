@@ -1,11 +1,19 @@
-# Tiralabra
+# Shakkipelin Tekoäly
+Projektin tarkoituksena on tehdä shakki pelille tekoäly, joka 
+pystyy pelaamaan sekä ihmistä että itseään vastaan.
+Projekti on toteutettu Java-ohjelmointikielellä ja käyttää xboard ja
+lichess alustoja hyödyntävää java-projektipohjaa [chess](https://github.com/TiraLabra/chess).
+
+Projekti on osa Helsingin Yliopiston *Tietorakenteet ja algoritmit*-[harjoitustyötä](https://studies.helsinki.fi/opintotarjonta/cu/hy-CU-118025627-2020-08-01).
 
 ## Dokumentit
-### [Määrittelydokumentti](https://github.com/jasminmo/tiralabra/blob/master/dokumentit/maarittelydokumentti.md)
+### [Määrittelydokumentti](./dokumentit/maarittelydokumentti.md)
 
 ## Viikko raportit
-* [1. viikko raportti](https://github.com/jasminmo/tiralabra/blob/master/dokumentit/viikkoraportti-1.md)
-* [2. viikko raportti](https://github.com/jasminmo/tiralabra/blob/master/dokumentit/viikkoraportti-2.md)
+* [1. viikko raportti](./dokumentit/viikkoraportti-1.md)
+* [2. viikko raportti](./dokumentit/viikkoraportti-2.md)
+* [3. viikko raportti](./dokumentit/viikkoraportti-3.md)
+* [4. viikko raportti](./dokumentit/viikkoraportti-4.md)
 
-### [Tuntikirjanpito](https://github.com/jasminmo/tiralabra/blob/master/dokumentit/tuntikirjanpito.md)
+### [Tuntikirjanpito](./dokumentit/tuntikirjanpito.md)
 
