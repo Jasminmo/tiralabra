@@ -1,6 +1,6 @@
 # Viikkoraportti 1
 
-[Tuntikirjanpito](https://github.com/jasminmo/tiralabra/blob/master/dokumentit/tuntikirjanpito.md)
+[Tuntikirjanpito](./tuntikirjanpito.md)
 
 ## Mitä olen tehnyt tällä viikolla
 Tustustu kurssimateriaaliin ja luin dokumentaatio-ohjeet tarkkaan.

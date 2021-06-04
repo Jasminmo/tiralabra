@@ -1,6 +1,6 @@
 # Viikkoraportti 2
 
-[Tuntikirjanpito](https://github.com/jasminmo/tiralabra/blob/master/dokumentit/tuntikirjanpito.md)
+[Tuntikirjanpito](./tuntikirjanpito.md)
 
 ## Mitä olen tehnyt tällä viikolla
 Lisäsin [shakki-pohjan](https://github.com/TiraLabra/chess) ohjelmaan ja tutustuin sen toimintaan ja dokumentaatioon.
