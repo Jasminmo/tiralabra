@@ -29,7 +29,7 @@ The project package hierarchy is as follows:
 - logging
     - Logger.java 
 
-![Class diagram](https://raw.githubusercontent.com/TiraLabra/chess/architecture-docs/documentation/pics/Architecture.png)
+![Class diagram](./pics/Architecture.png)
 
 ## Top level package (chess.*)
 

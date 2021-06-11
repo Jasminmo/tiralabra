@@ -5,22 +5,22 @@ package datastructureproject.ai;
  */
 public class AlphaBeta {
 
-    public static int AlphaBetaArvo(AlphaBetaState state){
-        if(state.isMaxState()) {
-            return getMaxValue(state, -1, 1);
+    public static int evaluate(AlphaBetaState state, int maxDepth) {
+        if (state.isMaxState()) {
+            return getMaxValue(state, -1, 1, maxDepth);
         }
-        return getMinValue(state, 1, -1);
+        return getMinValue(state, -1, 1, maxDepth);
     }
 
-    private static int getMinValue(AlphaBetaState state, int alpha, int beta){
-        if(state.isFinalState()) {
+    private static int getMinValue(AlphaBetaState state, int alpha, int beta, int maxDepth) {
+        if (state.isFinalState() || maxDepth == 0) {
             return state.value();
         }
 
         int value = Integer.MAX_VALUE;
-        for(AlphaBetaState adjacent : state.nextStates()){
-            value = Math.min(value, getMaxValue(adjacent, alpha, beta));
-            if(value <= alpha)
+        for (AlphaBetaState adjacent : state.nextStates()) {
+            value = Math.min(value, getMaxValue(adjacent, alpha, beta, maxDepth - 1));
+            if (value <= alpha)
                 return value;
 
             beta = Math.min(beta, value);
@@ -28,18 +28,18 @@ public class AlphaBeta {
         return value;
     }
 
-    private static int getMaxValue(AlphaBetaState state, int alpha, int beta) {
-        if(state.isFinalState())
+    private static int getMaxValue(AlphaBetaState state, int alpha, int beta, int maxDepth) {
+        if (state.isFinalState() || maxDepth == 0) {
             return state.value();
+        }
         int value = Integer.MIN_VALUE;
-        for(AlphaBetaState adjacent : state.nextStates()){
-            value = Math.max(value, getMinValue(adjacent, alpha, beta));
-            if(value >= beta)
+        for (AlphaBetaState adjacent : state.nextStates()) {
+            value = Math.max(value, getMinValue(adjacent, alpha, beta, maxDepth - 1));
+            if (value >= beta)
                 return value;
             alpha = Math.max(alpha, value);
         }
         return value;
     }
-
 
 }

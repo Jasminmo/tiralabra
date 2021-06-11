@@ -8,6 +8,10 @@ import chess.bot.TestBot;
 import chess.connection.LichessAPI;
 import chess.model.Profile;
 import chess.connection.*;
+import datastructureproject.ai.AlphaBetaBot;
+import datastructureproject.ai.ChessAIBot;
+import datastructureproject.ai.Heuristics;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Map;
@@ -35,7 +39,9 @@ public class App {
         You need to place your bot implementation to the variable below.
         Make sure it implements the interface ChessBot, and don't change the variable name!
         */
-        ChessBot bot = new TestBot(); // Your bot here!
+        ChessBot bot = new AlphaBetaBot(); // Your bot here!
+//        System.out.println(Heuristics.getValue("1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1      fen: 1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1 b k - 1 17", false));
+//        System.out.println(Heuristics.getValue("1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1      fen: 1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1 b k - 1 17", true));
 
         if (isLichess) {
             if (token == null) {
@@ -45,7 +51,7 @@ public class App {
             Profile myProfile = api.getAccount();
             System.out.println("Profile ID: " + myProfile.id);
             api.beginEventLoop();
-            
+
         } else {
 
             Long initialTime = System.currentTimeMillis();
