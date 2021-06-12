@@ -15,7 +15,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ChessAIBot implements ChessBot {
+public class GreedyBot implements ChessBot {
     private Board b = new Board();
 
     @Override
