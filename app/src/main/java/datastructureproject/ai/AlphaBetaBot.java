@@ -77,7 +77,7 @@ public class AlphaBetaBot implements ChessBot, AlphaBetaState {
                     }
                 }
             }
-            System.out.println(values);
+            //System.out.println(values);
             System.out.println("Worst move " + getMove((AlphaBetaBot) worst) + " has " + values.get(worst) + " points");
             System.out.println("Best  move " + getMove((AlphaBetaBot) best)  + " has " + values.get(best)  + " points");
             return getMove((AlphaBetaBot) best);

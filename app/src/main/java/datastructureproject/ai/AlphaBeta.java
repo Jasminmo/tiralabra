@@ -7,9 +7,9 @@ public class AlphaBeta {
 
     public static int evaluate(AlphaBetaState state, int maxDepth) {
         if (state.isMaxState()) {
-            return getMaxValue(state, -1, 1, maxDepth);
+            return getMaxValue(state, -1000, 1000, maxDepth);
         }
-        return getMinValue(state, -1, 1, maxDepth);
+        return getMinValue(state, -1000, 1000, maxDepth);
     }
 
     private static int getMinValue(AlphaBetaState state, int alpha, int beta, int maxDepth) {

@@ -4,13 +4,10 @@
 package chess;
 
 import chess.bot.ChessBot;
-import chess.bot.TestBot;
 import chess.connection.LichessAPI;
 import chess.model.Profile;
 import chess.connection.*;
 import datastructureproject.ai.AlphaBetaBot;
-import datastructureproject.ai.ChessAIBot;
-import datastructureproject.ai.Heuristics;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
