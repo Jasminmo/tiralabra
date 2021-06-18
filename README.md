@@ -17,6 +17,7 @@ Projekti on osa Helsingin Yliopiston *Tietorakenteet ja algoritmit*-[harjoitusty
 * [3. viikko raportti](./dokumentit/viikkoraportti-3.md)
 * [4. viikko raportti](./dokumentit/viikkoraportti-4.md)
 * [5. viikko raportti](./dokumentit/viikkoraportti-5.md)
+* [6. viikko raportti](./dokumentit/viikkoraportti-6.md)
 
 ### [Tuntikirjanpito](./dokumentit/tuntikirjanpito.md)
 
