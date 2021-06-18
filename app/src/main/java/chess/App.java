@@ -8,6 +8,7 @@ import chess.connection.LichessAPI;
 import chess.model.Profile;
 import chess.connection.*;
 import datastructureproject.ai.AlphaBetaBot;
+import datastructureproject.ai.GreedyBot;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -37,8 +38,6 @@ public class App {
         Make sure it implements the interface ChessBot, and don't change the variable name!
         */
         ChessBot bot = new AlphaBetaBot(); // Your bot here!
-//        System.out.println(Heuristics.getValue("1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1      fen: 1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1 b k - 1 17", false));
-//        System.out.println(Heuristics.getValue("1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1      fen: 1nbBkbnr/3p1Npp/8/8/4N3/4P3/7r/R1qQK1R1 b k - 1 17", true));
 
         if (isLichess) {
             if (token == null) {

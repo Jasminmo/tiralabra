@@ -1,79 +1,173 @@
 package datastructureproject.ai;
 
-import com.github.bhlangonijr.chesslib.Side;
+import datastructureproject.chess.Piece;
+import datastructureproject.chess.Side;
 import com.github.bhlangonijr.chesslib.Board;
 
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * This class contains static functions which are used to evaluate the current board situation.
+ */
 public class Heuristics {
+    private static final Map<Piece, Integer> map;
 
-    private static Side fromFen(String fen) {
-        Side side = Side.BLACK;
-        if (fen.split(" ")[1].equals("w")) {
-            side = Side.WHITE;
-        }
-        return side;
+    static {
+        map = new HashMap<>();
+        map.put(Piece.WHITE_PAWN, 1);
+        map.put(Piece.BLACK_PAWN, 1);
+
+        map.put(Piece.WHITE_ROOK, 5);
+        map.put(Piece.BLACK_ROOK, 5);
+
+        map.put(Piece.WHITE_BISHOP, 3);
+        map.put(Piece.BLACK_BISHOP, 3);
+
+        map.put(Piece.WHITE_KNIGHT, 3);
+        map.put(Piece.BLACK_KNIGHT, 3);
+
+        map.put(Piece.WHITE_QUEEN, 9);
+        map.put(Piece.BLACK_QUEEN, 9);
+
+        map.put(Piece.WHITE_KING, 0);
+        map.put(Piece.BLACK_KING, 0);
     }
 
-    public static int getBoardValue(AlphaBetaState state) {
-        Board b = ((AlphaBetaBot) state).getBoard();
-        Side side = fromFen(b.getFen());
-        int player_after = Heuristics.getSideValue(b, side);
-        int opponent_after = Heuristics.getSideValue(b, side.flip());
-        return player_after - opponent_after;
+    /**
+     *
+     * @return Map<Piece, Integer> - a map of piece values
+     */
+    public static Map<Piece, Integer> getPieceValues() {
+        return map;
     }
 
-
-    public static int getBoardValue(Board b) {
-        Side side = fromFen(b.getFen());
-        int player_after = Heuristics.getSideValue(b, side);
-        int opponent_after = Heuristics.getSideValue(b, side.flip());
-        return player_after - opponent_after;
+    /** This function returns the value of a given piece.
+     *
+     * @param piece
+     * @return value of piece.
+     */
+    public static int getPieceValue(Piece piece) {
+        return getPieceValues().get(piece);
     }
 
-    public static int getSideValue(String fen) {
-        return getSideValue(fen, fromFen(fen), false);
+    /** This function returns the number of occurrences of a given piece.
+     *
+     * @param fen - a string representing the current situation in
+     *            the chess board which is in Forsyth–Edwards Notation.
+     * @param piece - piece which we are counting.
+     * @return number of occurrences of piece.
+     */
+    public static int getOccurrences(String fen, Piece piece) {
+        return getOccurrences(fen, piece, false);
     }
 
-    public static int getSideValue(Board b, Side side) {
-        return getSideValue(b.getFen(), side);
-    }
-
-    public static int getSideValue(String fen, Side side) {
-        return getSideValue(fen, side, false);
-    }
-
-
-    public static int getSideValue(Board b, Side side, boolean debug) {
-        String fen = b.getFen();
-        return getSideValue(fen, side, debug);
-    }
-
-    public static int getSideValue(String fen, Side side, boolean debug) {
-        String[] fenPieces = fen.split(" ");
-        String placement = fenPieces[0];
-        String pawn = "p";
-        String rook = "r";
-        String night = "n";
-        String queen = "q";
-        String bishop = "b";
-        if (side.equals(Side.WHITE)) {
-            pawn = pawn.toUpperCase();
-            rook = rook.toUpperCase();
-            night = night.toUpperCase();
-            queen = queen.toUpperCase();
-            bishop = bishop.toUpperCase();
-        }
-        int pawns = placement.split(pawn, -1).length - 1;
-        int rooks = placement.split(rook, -1).length - 1;
-        int nights = placement.split(night, -1).length - 1;
-        boolean hasQueen = placement.contains(queen);
-        int bishops = placement.split(bishop, -1).length - 1;
-
+    /** This function returns the number of occurrences of a given piece.
+     *
+     * @param fen - a string representing the current situation in
+     *            the chess board which is in Forsyth–Edwards Notation.
+     * @param piece - piece which we are counting.
+     * @param debug - whether any debuggin information should be printed.
+     * @return number of occurrences of piece.
+     */
+    public static int getOccurrences(String fen, Piece piece, boolean debug) {
+        int occurs = fen.split(" ")[0].split(piece.toFENCharacter(), -1).length - 1;
         if (debug) {
-            System.out.println("placement: " + placement + "\tfen: " + fen);
-            System.out.println("This board has: " + pawns + " pawns, " +
-                    rooks + " rooks, " + nights + " nights, " + bishops + " bishops" +
-                    ((hasQueen) ? " and a queen" : ""));
+            System.out.print(" " + piece + " occurs " + occurs + " ");
         }
-        return pawns + rooks * 10 + bishops * 10 + nights * 5 + ((hasQueen) ? 50 : 0);
+        return occurs;
+    }
+
+    /** What is the current value of the gamestate for the player whose turn is next.
+     *
+     * @param b - Board
+     * @return current value of the gamestate
+     */
+    public static int getBoardValue(Board b) {
+        return getBoardValue(b, Side.parseFen(b.getFen()));
+    }
+
+    /** What is the current value of the gamestate for the given side.
+     *
+     * @param b - Board
+     * @param side - given side (Side.WHITE or Side.BLACK)
+     * @return current value of the gamestate
+     */
+    public static int getBoardValue(Board b, Side side) {
+        return getBoardValue(b, side, false);
+    }
+
+
+    /** What is the current value of the gamestate for the given side.
+     *
+     * @param b - Board
+     * @param side - given side (Side.WHITE or Side.BLACK)
+     * @param debug - whether any debuggin information should be printed.
+     * @return current value of the gamestate
+     */
+    public static int getBoardValue(Board b, Side side, boolean debug) {
+        String fen = b.getFen();
+        int player_after = Heuristics.getBoardValueForSide(fen, side, debug);
+        int opponent_after = Heuristics.getBoardValueForSide(fen, side.flip(), debug);
+        if (debug) {
+            System.out.println("player: " + player_after + "\t opponent:" + opponent_after);
+        }
+        return player_after - opponent_after;
+    }
+
+
+    /** What is the current value of the gamestate for the given side.
+     *
+     * @param fen - a string representing the current situation in
+     *            the chess board which is in Forsyth–Edwards Notation.
+     * @param side - given side (Side.WHITE or Side.BLACK)
+     * @param debug - whether any debuggin information should be printed.
+     * @return current value of the gamestate
+     */
+    public static int getBoardValueForSide(String fen, Side side, boolean debug) {
+        if (side.equals(Side.WHITE)) {
+            return getBoardValueForWhite(fen, debug);
+        }
+        return getBoardValueForBlack(fen, debug);
+    }
+
+    /** What is the current value of the gamestate for the Side.WHITE player.
+     *
+     * @param fen - a string representing the current situation in
+     *            the chess board which is in Forsyth–Edwards Notation.
+     * @param debug - whether any debuggin information should be printed.
+     * @return current value of the gamestate
+     */
+    public static int getBoardValueForWhite(String fen, boolean debug) {
+        return Piece.getWhitePieces()
+                .stream()
+                .mapToInt(p -> getBoardValueForPiece(fen, p, debug))
+                .sum();
+    }
+
+    /** What is the current value of the gamestate for the Side.BLACK player.
+     *
+     * @param fen - a string representing the current situation in
+     *            the chess board which is in Forsyth–Edwards Notation.
+     * @param debug - whether any debuggin information should be printed.
+     * @return current value of the gamestate
+     */
+    public static int getBoardValueForBlack(String fen, boolean debug) {
+        return Piece.getBlackPieces()
+                .stream()
+                .mapToInt(p -> getBoardValueForPiece(fen, p, debug))
+                .sum();
+    }
+
+    /** This function returns the number of occurrences of a given piece times its value.
+     *
+     * @param fen - a string representing the current situation in
+     *            the chess board which is in Forsyth–Edwards Notation.
+     * @param piece - piece which we are counting.
+     * @param debug - whether any debuggin information should be printed.
+     * @return occurrences of a given piece times its value
+     */
+    public static int getBoardValueForPiece(String fen, Piece piece, boolean debug) {
+        return getPieceValue(piece) * getOccurrences(fen, piece, debug);
     }
 }

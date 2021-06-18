@@ -8,6 +8,8 @@ Projekti on osa Helsingin Yliopiston *Tietorakenteet ja algoritmit*-[harjoitusty
 
 ## Dokumentit
 ### [Määrittelydokumentti](./dokumentit/maarittelydokumentti.md)
+### [Toteutusdokumentti](./dokumentit/toteutusdokumentti.md)
+### [Testausdokumentti](./dokumentit/testausdokumentti.md)
 
 ## Viikko raportit
 * [1. viikko raportti](./dokumentit/viikkoraportti-1.md)
