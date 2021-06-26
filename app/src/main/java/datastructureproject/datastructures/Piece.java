@@ -1,9 +1,5 @@
-package datastructureproject.chess;
+package datastructureproject.datastructures;
 
-import com.github.bhlangonijr.chesslib.PieceType;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -120,8 +116,8 @@ public enum Piece {
             case "BISHOP": return (isWhite)? "B": "b";
             case "KNIGHT": return (isWhite)? "N": "n";
             case "QUEEN": return (isWhite)? "Q": "q";
-            case "KING": return (isWhite)? "K": "k";
-            default: throw new IllegalStateException("This is impossible!");
+            // case "KING": return (isWhite)? "K": "k";
+            default: return (isWhite)? "K": "k"; // KING
         }
     }
 }

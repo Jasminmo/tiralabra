@@ -7,8 +7,10 @@ import chess.bot.ChessBot;
 import chess.connection.LichessAPI;
 import chess.model.Profile;
 import chess.connection.*;
-import datastructureproject.ai.AlphaBetaBot;
-import datastructureproject.ai.GreedyBot;
+import datastructureproject.ai.algorithms.AlphaBeta;
+import datastructureproject.ai.algorithms.MinMax;
+import datastructureproject.chess.GreedyMovePicker;
+import datastructureproject.chess.TreeSearchBot;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -37,7 +39,7 @@ public class App {
         You need to place your bot implementation to the variable below.
         Make sure it implements the interface ChessBot, and don't change the variable name!
         */
-        ChessBot bot = new AlphaBetaBot(); // Your bot here!
+        ChessBot bot = new TreeSearchBot(new AlphaBeta(2)); // Your bot here!
 
         if (isLichess) {
             if (token == null) {
@@ -49,7 +51,6 @@ public class App {
             api.beginEventLoop();
 
         } else {
-
             Long initialTime = System.currentTimeMillis();
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             while (System.currentTimeMillis() - initialTime < 2500 && !in.ready()) {

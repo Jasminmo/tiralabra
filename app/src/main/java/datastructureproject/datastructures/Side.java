@@ -1,4 +1,4 @@
-package datastructureproject.chess;
+package datastructureproject.datastructures;
 
 /** This enum represents Side to move in the chess board. */
 public enum Side {

@@ -1,8 +1,8 @@
-package datastructureproject.ai;
+package datastructureproject.chess;
 
-import datastructureproject.chess.Piece;
-import datastructureproject.chess.Side;
 import com.github.bhlangonijr.chesslib.Board;
+import datastructureproject.datastructures.Piece;
+import datastructureproject.datastructures.Side;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -30,8 +30,8 @@ public class Heuristics {
         map.put(Piece.WHITE_QUEEN, 9);
         map.put(Piece.BLACK_QUEEN, 9);
 
-        map.put(Piece.WHITE_KING, 0);
-        map.put(Piece.BLACK_KING, 0);
+        map.put(Piece.WHITE_KING, 100);
+        map.put(Piece.BLACK_KING, 100);
     }
 
     /**
@@ -59,23 +59,7 @@ public class Heuristics {
      * @return number of occurrences of piece.
      */
     public static int getOccurrences(String fen, Piece piece) {
-        return getOccurrences(fen, piece, false);
-    }
-
-    /** This function returns the number of occurrences of a given piece.
-     *
-     * @param fen - a string representing the current situation in
-     *            the chess board which is in Forsyth–Edwards Notation.
-     * @param piece - piece which we are counting.
-     * @param debug - whether any debuggin information should be printed.
-     * @return number of occurrences of piece.
-     */
-    public static int getOccurrences(String fen, Piece piece, boolean debug) {
-        int occurs = fen.split(" ")[0].split(piece.toFENCharacter(), -1).length - 1;
-        if (debug) {
-            System.out.print(" " + piece + " occurs " + occurs + " ");
-        }
-        return occurs;
+        return fen.split(" ")[0].split(piece.toFENCharacter(), -1).length - 1;
     }
 
     /** What is the current value of the gamestate for the player whose turn is next.
@@ -93,8 +77,8 @@ public class Heuristics {
      * @param side - given side (Side.WHITE or Side.BLACK)
      * @return current value of the gamestate
      */
-    public static int getBoardValue(Board b, Side side) {
-        return getBoardValue(b, side, false);
+    public static int getBoardValue(Board b, String side) {
+        return getBoardValue(b, Side.valueOf(side));
     }
 
 
@@ -102,16 +86,12 @@ public class Heuristics {
      *
      * @param b - Board
      * @param side - given side (Side.WHITE or Side.BLACK)
-     * @param debug - whether any debuggin information should be printed.
      * @return current value of the gamestate
      */
-    public static int getBoardValue(Board b, Side side, boolean debug) {
+    public static int getBoardValue(Board b, Side side) {
         String fen = b.getFen();
-        int player_after = Heuristics.getBoardValueForSide(fen, side, debug);
-        int opponent_after = Heuristics.getBoardValueForSide(fen, side.flip(), debug);
-        if (debug) {
-            System.out.println("player: " + player_after + "\t opponent:" + opponent_after);
-        }
+        int player_after = Heuristics.getBoardValueForSide(fen, side);
+        int opponent_after = Heuristics.getBoardValueForSide(fen, side.flip());
         return player_after - opponent_after;
     }
 
@@ -121,41 +101,38 @@ public class Heuristics {
      * @param fen - a string representing the current situation in
      *            the chess board which is in Forsyth–Edwards Notation.
      * @param side - given side (Side.WHITE or Side.BLACK)
-     * @param debug - whether any debuggin information should be printed.
      * @return current value of the gamestate
      */
-    public static int getBoardValueForSide(String fen, Side side, boolean debug) {
+    public static int getBoardValueForSide(String fen, Side side) {
         if (side.equals(Side.WHITE)) {
-            return getBoardValueForWhite(fen, debug);
+            return getBoardValueForWhite(fen);
         }
-        return getBoardValueForBlack(fen, debug);
+        return getBoardValueForBlack(fen);
     }
 
     /** What is the current value of the gamestate for the Side.WHITE player.
      *
      * @param fen - a string representing the current situation in
      *            the chess board which is in Forsyth–Edwards Notation.
-     * @param debug - whether any debuggin information should be printed.
      * @return current value of the gamestate
      */
-    public static int getBoardValueForWhite(String fen, boolean debug) {
+    public static int getBoardValueForWhite(String fen) {
         return Piece.getWhitePieces()
                 .stream()
-                .mapToInt(p -> getBoardValueForPiece(fen, p, debug))
+                .mapToInt(p -> getBoardValueForPiece(fen, p))
                 .sum();
     }
 
     /** What is the current value of the gamestate for the Side.BLACK player.
      *
      * @param fen - a string representing the current situation in
-     *            the chess board which is in Forsyth–Edwards Notation.
-     * @param debug - whether any debuggin information should be printed.
+     *            the chess board which is in Forsyth-Edwards Notation.
      * @return current value of the gamestate
      */
-    public static int getBoardValueForBlack(String fen, boolean debug) {
+    public static int getBoardValueForBlack(String fen) {
         return Piece.getBlackPieces()
                 .stream()
-                .mapToInt(p -> getBoardValueForPiece(fen, p, debug))
+                .mapToInt(p -> getBoardValueForPiece(fen, p))
                 .sum();
     }
 
@@ -164,10 +141,9 @@ public class Heuristics {
      * @param fen - a string representing the current situation in
      *            the chess board which is in Forsyth–Edwards Notation.
      * @param piece - piece which we are counting.
-     * @param debug - whether any debuggin information should be printed.
      * @return occurrences of a given piece times its value
      */
-    public static int getBoardValueForPiece(String fen, Piece piece, boolean debug) {
-        return getPieceValue(piece) * getOccurrences(fen, piece, debug);
+    public static int getBoardValueForPiece(String fen, Piece piece) {
+        return getPieceValue(piece) * getOccurrences(fen, piece);
     }
 }

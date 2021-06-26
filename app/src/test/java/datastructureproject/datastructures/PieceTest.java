@@ -1,5 +1,7 @@
 package datastructureproject.chess;
 
+import datastructureproject.datastructures.Piece;
+import datastructureproject.datastructures.Side;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

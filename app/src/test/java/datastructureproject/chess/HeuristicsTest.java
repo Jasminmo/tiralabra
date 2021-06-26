@@ -1,8 +1,7 @@
 package datastructureproject.ai;
 
-import datastructureproject.chess.Piece;
-
-import java.util.Map;
+import datastructureproject.chess.Heuristics;
+import datastructureproject.datastructures.Piece;
 
 import static org.junit.Assert.*;
 import org.junit.Test;
@@ -47,7 +46,7 @@ public class HeuristicsTest {
 
     @Test
     public void testGetPieceValuesKingHasValueOfZero() {
-        assertEquals("White king should have a value of 0", 0, Heuristics.getPieceValue(Piece.WHITE_KING));
-        assertEquals("Black king should have a value of 0", 0, Heuristics.getPieceValue(Piece.BLACK_KING));
+        assertEquals("White king should have a value of 100", 100, Heuristics.getPieceValue(Piece.WHITE_KING));
+        assertEquals("Black king should have a value of 100", 100, Heuristics.getPieceValue(Piece.BLACK_KING));
     }
 }

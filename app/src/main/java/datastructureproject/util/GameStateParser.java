@@ -6,15 +6,15 @@ import com.github.bhlangonijr.chesslib.Piece;
 import com.github.bhlangonijr.chesslib.Square;
 import com.github.bhlangonijr.chesslib.move.Move;
 
-public class GameStateParser {
+public interface GameStateParser {
 
-    public static Board updateState(GameState gs) {
+    static Board updateState(GameState gs) {
         Board b = new Board();
         gs.moves.forEach(m -> setMove(b, m));
         return b;
     }
 
-    public static void setMove(Board b, String move) {
+    static void setMove(Board b, String move) {
         if (isPromotionMove(move)) {
             setPromotionMove(b, move);
         } else {
@@ -22,37 +22,37 @@ public class GameStateParser {
         }
     }
 
-    public static String getStartLocation(String move) {
+    static String getStartLocation(String move) {
         return move.substring(0, 2).toUpperCase();
     }
 
-    public static String getEndLocation(String move) {
+    static String getEndLocation(String move) {
         return move.substring(2, 4).toUpperCase();
     }
 
-    public static boolean isPromotionMove(String move) {
+    static boolean isPromotionMove(String move) {
         return move.length() > 4;
     }
 
-    public static String getPromotion(String move) {
+    static String getPromotion(String move) {
         return move.substring(4).toUpperCase();
     }
 
-    public static void setPromotionMove(Board b, String move) {
-        b.doMove(new Move(getStartSquare(move), getEndSquare(move), getPromotionPiece(b, move)));
+    static void setPromotionMove(Board b, String move) {
+        String side = b.getPiece(getStartSquare(move)).getPieceSide().value();
+        b.doMove(new Move(getStartSquare(move), getEndSquare(move), getPromotionPiece(side, move)));
     }
 
-    public static Square getStartSquare(String move) {
+    static Square getStartSquare(String move) {
         return Square.valueOf(getStartLocation(move));
     }
 
-    public static Square getEndSquare(String move) {
+    static Square getEndSquare(String move) {
         return Square.valueOf(getEndLocation(move));
     }
 
-    public static Piece getPromotionPiece(Board b, String move) {
+    static Piece getPromotionPiece(String player, String move) {
         String promote = getPromotion(move);
-        String player = b.getPiece(getStartSquare(move)).getPieceSide().value();
         String promotionPiece = player + "_";
         if (promote.equals("Q"))
             promotionPiece += "QUEEN";
