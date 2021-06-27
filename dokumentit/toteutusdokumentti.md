@@ -22,12 +22,12 @@ ahneasti pelaava versio seuraavalla kutsulla
 ```MinMax```-algoritmilla pelaava kutsulla
     
 ```
-    TreeSearchBot greedyBot = new TreeSearchBot(new MinMax(2));
+    TreeSearchBot minMaxBot = new TreeSearchBot(new MinMax(2));
 ```
 ```alpha-beta```-algoritmilla pelaava kutsulla
     
 ```
-    TreeSearchBot greedyBot = new TreeSearchBot(new AlphaBeta(2));
+    TreeSearchBot alphaBetaBot = new TreeSearchBot(new AlphaBeta(2));
 ```
 
 Luokka ```Heuristics``` käyttää paketin ```datastructureproject.chess```

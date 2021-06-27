@@ -9,7 +9,8 @@
 * Lisäksi päivitin dokumentaatiota ja koodin toimintaa kuvaavia jDocs kommenteja.
 
 ## Miten ohjelma on edistynyt
-* Luokat ```AlphaBetaBot``` ja ```GreedyBot``` on postettu ja.
+* Luokat ```AlphaBetaBot``` ja ```GreedyBot``` on postettu ja ne on korvattu luokilla ```TreeSearchBot``` ```GreedyMovePicker``` ja ```AlphaBeta```.
+* Sovellukseen on lisätty useita luokkia ja rajapintoja esim. ```MinMax```.
 * Lisäsin paljon testejä ja projektin testikattavuus on kasvanut.
 
 ## Mitä opin tällä viikolla
