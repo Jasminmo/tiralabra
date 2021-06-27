@@ -40,6 +40,7 @@ repositories {
     // You can declare any Maven/Ivy/file repository here.
     mavenCentral()
     maven { url 'https://jitpack.io' }
+    jcenter()
 }
 
 test {
@@ -59,6 +60,9 @@ dependencies {
 
     // Use JUnit test framework
     testImplementation 'junit:junit:4.12'
+
+    // Use mockito
+    testImplementation "org.mockito:mockito-core:3.+"
 
     compile group: 'org.json', name: 'json', version: '20190722'
     implementation 'com.github.bhlangonijr:chesslib:1.1.12'

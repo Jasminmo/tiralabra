@@ -1,20 +1,49 @@
-package datastructureproject.chess;
+package datastructureproject.datastructures;
 
-import datastructureproject.datastructures.Piece;
-import datastructureproject.datastructures.Side;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class PieceTest {
     @Test
+    public void testPieceHasCorrectSide () {
+        Piece p = Piece.WHITE_PAWN;
+        assertTrue(p.hasSide(p.getSide()));
+        assertFalse(p.hasSide(Side.BLACK));
+    }
+
+    @Test
+    public void testGetWhitePieces () {
+        assertEquals("Should equal six pieces", 6, Piece.getWhitePieces().size());
+
+        assertTrue("All pieces should have Side.WHITE as side", Piece.getWhitePieces().stream().allMatch(p-> p.hasSide(Side.WHITE)));
+    }
+
+    @Test
+    public void testGetAllPieces () {
+        assertEquals("Should equal 12 pieces", 12, Piece.getAll().size());
+    }
+
+
+    @Test
+    public void testGetBlackPieces () {
+        assertEquals("Should equal six pieces", 6, Piece.getBlackPieces().size());
+
+        assertTrue("All pieces should have Side.BLACK as side", Piece.getBlackPieces().stream().allMatch(p-> p.hasSide(Side.BLACK)));
+    }
+
+    @Test
     public void testFromFENReturnsPawnWithCorrectSide () {
         String key = "P";
-        assertEquals("piece is white", Side.WHITE, Piece.fromFEN(key).getSide());
-        assertEquals("piece is white pawn", Piece.WHITE_PAWN, Piece.fromFEN(key));
+        Piece p = Piece.fromFEN(key);
+        assertEquals("piece is white", Side.WHITE, p.getSide());
+        assertTrue(p.hasSide(p.getSide()));
+        assertEquals("piece is white pawn", Piece.WHITE_PAWN, p);
         key = "p";
-        assertEquals("piece is black", Side.BLACK, Piece.fromFEN(key).getSide());
-        assertEquals("piece is black pawn", Piece.BLACK_PAWN, Piece.fromFEN(key));
+        p = Piece.fromFEN(key);
+        assertEquals("piece is black", Side.BLACK, p.getSide());
+        assertTrue(p.hasSide(p.getSide()));
+        assertEquals("piece is black pawn", Piece.BLACK_PAWN, p);
     }
 
     @Test

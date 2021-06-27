@@ -1,16 +1,19 @@
-package datastructureproject.ai;
+package datastructureproject.chess;
 
-import datastructureproject.chess.Heuristics;
+import com.github.bhlangonijr.chesslib.Board;
 import datastructureproject.datastructures.Piece;
 
 import static org.junit.Assert.*;
+
+import datastructureproject.datastructures.Side;
 import org.junit.Test;
 
 public class HeuristicsTest {
+    private static String startingFen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1\n";
 
     @Test
     public void testGetPieceValuesIsNotNullOrEmpty() {
-        assertNotNull(Heuristics.getPieceValues());
+        assertNotNull((new Heuristics()).getPieceValues());
         assertNotEquals(0, Heuristics.getPieceValues().size());
     }
 
@@ -49,4 +52,20 @@ public class HeuristicsTest {
         assertEquals("White king should have a value of 100", 100, Heuristics.getPieceValue(Piece.WHITE_KING));
         assertEquals("Black king should have a value of 100", 100, Heuristics.getPieceValue(Piece.BLACK_KING));
     }
+
+    @Test
+    public void testBoardValueIsEqualForBothSideAtTheStartState() {
+        assertEquals("The board value should be equal", 0, Heuristics.getBoardValue(new Board()));
+        assertEquals("The board value should be equal", 0, Heuristics.getBoardValue(new Board(), "WHITE"));
+        assertEquals("The board value should be equal", 0, Heuristics.getBoardValue(new Board(), "BLACK"));
+
+        assertEquals("The board value should be equal", Heuristics.getBoardValueForSide(startingFen, Side.WHITE), Heuristics.getBoardValueForSide(startingFen, Side.BLACK));
+    }
+
+    @Test
+    public void testGetBoardValueForPieceAtTheStartState() {
+        assertEquals("The board value for white pawn should have a value of 8", 8, Heuristics.getBoardValueForPiece(startingFen, Piece.WHITE_PAWN));
+        assertEquals("The board value for both sides should be equal", Heuristics.getBoardValueForPiece(startingFen, Piece.WHITE_PAWN), Heuristics.getBoardValueForPiece(startingFen, Piece.BLACK_PAWN));
+    }
+
 }

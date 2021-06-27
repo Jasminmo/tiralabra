@@ -1,6 +1,5 @@
-package datastructureproject.chess;
+package datastructureproject.datastructures;
 
-import datastructureproject.datastructures.Side;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,6 +9,12 @@ public class SideTest {
     private static String nextMoveFen = "rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1\n";
 
     @Test
+    public void testToString () {
+        assertEquals("should be white", "WHITE", Side.WHITE.toString());
+        assertEquals("should be black", "BLACK", Side.BLACK.toString());
+    }
+
+    @Test
     public void testWhiteStartsInTheStartingPosition () {
         assertEquals("white starts", Side.WHITE, Side.parseFen(startingFen));
     }
@@ -17,6 +22,11 @@ public class SideTest {
     @Test
     public void testBlacksTurnInTheNextPosition () {
         assertEquals("black moves next", Side.BLACK, Side.parseFen(nextMoveFen));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testIncorrectFenThrowsError () {
+        Side.parseFen("rnbq kbnr");
     }
 
     @Test
