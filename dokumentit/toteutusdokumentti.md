@@ -8,21 +8,31 @@ lichess alustoja hyödyntävää java-projektipohjaa [chess](https://github.com/
 Projektin koodi löytyy ```datastructureproject``` nimisestä Java-paketista
 ja projektin käyttämä alustan koodi löytyy ```chess``` ja ```loggin``` nimisistä Java-paketeista.
 
-Luokka ```chess.App``` on ohjelman pääluokka ja se käyttää ```chess.botChessBot```-rajapintaa toteuttavaa
-luokkaa shakin-tekoälynä. Paketin ```datastructureproject.ai``` ```GreedyBot``` ja ```AlphaBetaBot``` luokat
-toteuttavat tämän rajapinnan. Molemmat luokat käyttävät luokkaa ```Heuristics``` pelitilanteen arvionnissa.
-Luokka ```GreedyBot``` pelaa ahneesti, eli se valitsee parhaimman arvoisen shakki-siirron kaikista
-mahdollisista siirtoista. Luokka ```AlphaBetaBot``` taas rakentaa pelipuun joka on korkeudeltaan kolme,
-eli se arvioi mikä on paras siirto, kun katsotaan kolmen pelisiirron jälkeistä tilannetta, ja valitsee
-näistä siirroista parhaimman. Luokka ```Heuristics``` käyttää paketin ```datastructureproject.chess```
-luokkia pelitilanteen arvionissa. Pelitilannetta arviodaan siten että katsotaan mikä on molemien pelaajien
-jäljellä olevat pelinappulat ja näitä sitten lasketaan standardin perusarvion perusteella (katso [WikiPedia](https://en.wikipedia.org/wiki/Chess_piece_relative_value#Standard_valuations)) ja summataan.
-Pelinappulien arvot ovat:
- * Sotilas on yhden pisteen arvoinen.
- * Lähetti ja ratsu ovat molemmat kolmen pisteen arvoisia.
- * Torni on viiden pisteen arvoinen.
- * Kuningatar on yhdeksän pisteen arvoinen.
+Luokka ```chess.App``` on ohjelman pääluokka ja se käyttää ```chess.bot.ChessBot```-rajapintaa toteuttavaa
+luokkaa shakin-pelaamisessa. Paketista ```datastructureproject.chess``` löytyvä ```TreeSearchBot``` luokka
+toteuttaa tämän rajapinnan, mikä käyttää luokkaa ```Heuristics``` pelilaudan tilanteen arvionnissa.
+Luokka ```TreeSearchBot``` voi pelata ahneesti (**greedy** eli valitsee parhaimman arvoisen tämän hetkisistä) tai sitten arvio tulevat mahdolliset shakki-siirrot ja valitsee niistä sen mikä parhaimman arvoisen mahdollisista siirtoista. Luokalla on kahta konstruktoria. Yksi niistä ottaa argumenttina rajapintaa ```ChessMovePicker``` toteuttavan luokan ja toinen ```GameNodeEvaluator``` rajapintaa toteuttavan luokan. Rajapinta ```ChessMovePicker``` toteuttavat luokat jotka saavat tiettyä pelitilannetta kuvaavaa luokan ```BoardState``` oliota ja valitsevat sitten seuraavan siirron. Tällä hetkellä rajapinta ```ChessMovePicker``` toteuttavat vain kaksi luokkaa ```GreedyMovePicker``` ja ```EvaluatingPicker```. Luokka ```GreedyMovePicker``` voidaan käyttää saamaan luokka ```TreeSearchBot``` toimimaan ahneasti shakkisiirtojen valinnassa, kun taas luokkaa ```EvaluatingPicker``` voidaan käyttää järkevämmän tekoälyn toiminnassa. Nimittäin, luokka ottaa argumentina rajapintaa ```GameNodeEvaluator``` toteuttavan luokan joita on tällä hetkellä kaksi ```MinMax``` ja ```AlphaBeta```.
 
+Lyhyesti luokasta ```TreeSearchBot``` saadaan
+ahneasti pelaava versio seuraavalla kutsulla
+    
+```
+    TreeSearchBot greedyBot = new TreeSearchBot(new GreedyMovePicker());
+```
+```MinMax```-algoritmilla pelaava kutsulla
+    
+```
+    TreeSearchBot greedyBot = new TreeSearchBot(new MinMax(2));
+```
+```alpha-beta```-algoritmilla pelaava kutsulla
+    
+```
+    TreeSearchBot greedyBot = new TreeSearchBot(new AlphaBeta(2));
+```
+
+Luokka ```Heuristics``` käyttää paketin ```datastructureproject.chess```
+luokkia pelitilanteen arvionissa. Pelitilannetta arviodaan siten että katsotaan mikä on molemien pelaajien
+jäljellä olevat pelinappulat ja näitä sitten lasketaan pelitilanteen arvio (katso [WikiPedia](https://en.wikipedia.org/wiki/Chess_piece_relative_value#Standard_valuations)).
 
 ## Saavutetut aika- ja tilavaativuudet
 Algoritmin aikavaativuus on parhaassa tapauksessa ```O(b^(d/2))``` ja pahimmassa tapauksessa ```O(b^d)```,

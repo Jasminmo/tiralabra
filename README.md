@@ -7,6 +7,7 @@ lichess alustoja hyödyntävää java-projektipohjaa [chess](https://github.com/
 Projekti on osa Helsingin Yliopiston *Tietorakenteet ja algoritmit*-[harjoitustyötä](https://studies.helsinki.fi/opintotarjonta/cu/hy-CU-118025627-2020-08-01).
 
 ## Dokumentit
+### [Käyttöohje](./dokumentit/kayttoohje.md)
 ### [Määrittelydokumentti](./dokumentit/maarittelydokumentti.md)
 ### [Toteutusdokumentti](./dokumentit/toteutusdokumentti.md)
 ### [Testausdokumentti](./dokumentit/testausdokumentti.md)
@@ -18,6 +19,7 @@ Projekti on osa Helsingin Yliopiston *Tietorakenteet ja algoritmit*-[harjoitusty
 * [4. viikko raportti](./dokumentit/viikkoraportti-4.md)
 * [5. viikko raportti](./dokumentit/viikkoraportti-5.md)
 * [6. viikko raportti](./dokumentit/viikkoraportti-6.md)
+* [7. viikko raportti](./dokumentit/viikkoraportti-7.md)
 
 ### [Tuntikirjanpito](./dokumentit/tuntikirjanpito.md)
 

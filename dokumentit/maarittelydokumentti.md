@@ -23,6 +23,7 @@ Lisä tietoa saa lukemalla projektipohjan [ohjeita](../app/documentation/Beginne
 
 
 ### Lähteet
+* [MinMax (wikipedia)](https://en.wikipedia.org/wiki/minmax#Minimax_algorithm_with_alternate_moves)
 * [Alpha–beta pruning (wikipedia)](https://en.wikipedia.org/wiki/Alpha–beta_pruning)
 * [Introduction to AI](https://materiaalit.github.io/intro-to-ai/)-kurssi
 * [Shakin pelisäännöt](https://en.wikipedia.org/wiki/Rules_of_chess)

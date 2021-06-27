@@ -8,4 +8,5 @@
 | 4 | 14 | [Viikkoraportti](./viikkoraportti-4.md) |
 | 5 | 20 | [Viikkoraportti](./viikkoraportti-5.md) |
 | 6 | 15 | [Viikkoraportti](./viikkoraportti-6.md) |
-| yht | 72   | | 
+| 7 | 30 | [Viikkoraportti](./viikkoraportti-6.md) |
+| yht | 102   | | 
